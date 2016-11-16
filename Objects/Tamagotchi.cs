@@ -6,7 +6,7 @@ namespace Tamagotchi.Objects
     {
         private string _name;
         private int _hunger;
-        private int _attention;
+        private int happiness;
         private int _sleep;
         private bool _alive;
         private int _id;
@@ -16,7 +16,7 @@ namespace Tamagotchi.Objects
         {
             _name = tamaName;
             _hunger = 5;
-            _attention = 5;
+            happiness = 5;
             _sleep = 5;
             _alive = true;
             _instances.Add(this);
@@ -33,24 +33,43 @@ namespace Tamagotchi.Objects
         }
         public void Feed()
         {
-            if(_hunger<5)
+            if(_hunger < 5 && _alive)
             {
                 _hunger += 1;
             }
         }
         public void Sleep()
         {
-            if(_sleep < 5)
+            if(_sleep < 5 && _alive)
             {
                 _sleep += 1;
             }
         }
-        public void Attention()
+        public void Happiness()
         {
-            if(_attention < 5)
+            if(happiness < 5 && _alive)
             {
-                _attention++;
+                happiness++;
             }
+        }
+        public void CheckAlive()
+        {
+            if(_hunger <= 0, _happiness <= 0, _sleep <= 0)
+            {
+                _alive = false;
+            }
+        }
+        public int GetId()
+        {
+            return _id;
+        }
+        public static List<Tamagotchi> GetAll()
+        {
+            return _instances;
+        }
+        public static Tamagotchi Find(searchId)
+        {
+            return _instances[searchId-1];
         }
     }
 }
