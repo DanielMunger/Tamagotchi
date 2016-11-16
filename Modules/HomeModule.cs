@@ -1,6 +1,7 @@
 using Nancy;
 using System;
 using System.Collections.Generic;
+using System.Timers;
 using Tamagotchis.Objects;
 
 namespace Tamagotchis
@@ -40,7 +41,6 @@ namespace Tamagotchis
                 }
                 else
                 {
-                    selectedTama.PassTime();
                     if(whichButton == "hunger")
                     {
                         selectedTama.Hunger();

@@ -1,33 +1,35 @@
-<h1>@Model.GetName()</h1>
+<head>
+    <meta http-equiv="refresh" content="2">
+</head>
+<body>
+    <h1>@Model.GetName()</h1>
 
-<h2>Current Stats</h2>
-<h3>Your Tamagotchi dies when any of these reach 0!</h3>
-<h4>Hunger: @Model.GetHunger()</h4>
-<h4>Happiness: @Model.GetHappiness()</h4>
-<h4>Sleep: @Model.GetSleep()</h4>
-@{
-    if(Model.GetAlive())
-    {
-        <form action="/tamagotchis/@Model.GetId()" method="post">
-            <button type="submit" name="which-button" value="hunger">Feed Tamagotchi</button>
-        </form>
-        <form action="/tamagotchis/@Model.GetId()" method="post">
-            <button type="submit" name="which-button" value="happiness">Pet Tamagotchi</button>
-        </form>
-        <form action="/tamagotchis/@Model.GetId()" method="post">
-            <button type="submit" name="which-button" value="sleep">Put Tamagotchi to sleep</button>
-        </form>
-        <form action="/tamagotchis/@Model.GetId()" method="post">
-            <button type="submit" name="which-button" value="pass-time">Pass some time</button>
-        </form>
+    <h2>Current Stats</h2>
+    <h3>Your Tamagotchi dies when any of these reach 0!</h3>
+    <h4>Hunger: @Model.GetHunger()</h4>
+    <h4>Happiness: @Model.GetHappiness()</h4>
+    <h4>Sleep: @Model.GetSleep()</h4>
+    @{
+        if(Model.GetAlive())
+        {
+            <form action="/tamagotchis/@Model.GetId()" method="post">
+                <button type="submit" name="which-button" value="hunger">Feed Tamagotchi</button>
+            </form>
+            <form action="/tamagotchis/@Model.GetId()" method="post">
+                <button type="submit" name="which-button" value="happiness">Pet Tamagotchi</button>
+            </form>
+            <form action="/tamagotchis/@Model.GetId()" method="post">
+                <button type="submit" name="which-button" value="sleep">Put Tamagotchi to sleep</button>
+            </form>
+        }
+        else
+        {
+            <p>Your Tamagotchi is dead!</p>
+            <form action="/tamagotchis/@Model.GetId()" method="post">
+                <button type="submit" name="which-button" value="remove">Remove this Tamagotchi from the ranch before it smells</button>
+            </form>
+        }
     }
-    else
-    {
-        <p>Your Tamagotchi is dead!</p>
-        <form action="/tamagotchis/@Model.GetId()" method="post">
-            <button type="submit" name="which-button" value="remove">Remove this Tamagotchi from the ranch before it smells</button>
-        </form>
-    }
-}
-<h3><a href="/tamagotchis">Click here to view all of your Tamagotchis</a></h3>
-<h3><a href="/tamagotchis/new">Click here to add another Tamagotchi to the ranch</a></h3>
+    <h3><a href="/tamagotchis">Click here to view all of your Tamagotchis</a></h3>
+    <h3><a href="/tamagotchis/new">Click here to add another Tamagotchi to the ranch</a></h3>
+</body>
