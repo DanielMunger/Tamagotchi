@@ -1,29 +1,30 @@
+using System;
 using System.Collections.Generic;
 
-namespace Tamagotchi.Objects
+namespace Tamagotchis.Objects
 {
     public class Tamagotchi
     {
         private string _name;
         private int _hunger;
-        private int happiness;
+        private int _happiness;
         private int _sleep;
         private bool _alive;
         private int _id;
-        private List<Tamagotchi> _instances = new List<Tamagotchi> {};
+        private static List<Tamagotchi> _instances = new List<Tamagotchi> {};
 
-        private Tamagotchi(string tamaName)
+        public Tamagotchi(string tamaName)
         {
             _name = tamaName;
             _hunger = 5;
-            happiness = 5;
+            _happiness = 5;
             _sleep = 5;
             _alive = true;
             _instances.Add(this);
             _id = _instances.Count;
         }
 
-        private void SetName(string tamaName)
+        public void SetName(string tamaName)
         {
             _name = tamaName;
         }
@@ -31,7 +32,23 @@ namespace Tamagotchi.Objects
         {
             return _name;
         }
-        public void Feed()
+        public int GetHunger()
+        {
+            return _hunger;
+        }
+        public int GetHappiness()
+        {
+            return _happiness;
+        }
+        public int GetSleep()
+        {
+            return _sleep;
+        }
+        public bool GetAlive()
+        {
+            return _alive;
+        }
+        public void Hunger()
         {
             if(_hunger < 5 && _alive)
             {
@@ -47,14 +64,20 @@ namespace Tamagotchi.Objects
         }
         public void Happiness()
         {
-            if(happiness < 5 && _alive)
+            if(_happiness < 5 && _alive)
             {
-                happiness++;
+                _happiness++;
             }
+        }
+        public void PassTime()
+        {
+            _hunger -= 1;
+            _happiness -= 1;
+            _sleep -= 1;
         }
         public void CheckAlive()
         {
-            if(_hunger <= 0, _happiness <= 0, _sleep <= 0)
+            if(_hunger <= 0 || _happiness <= 0 || _sleep <= 0)
             {
                 _alive = false;
             }
@@ -67,9 +90,13 @@ namespace Tamagotchi.Objects
         {
             return _instances;
         }
-        public static Tamagotchi Find(searchId)
+        public static Tamagotchi Find(int searchId)
         {
             return _instances[searchId-1];
+        }
+        public static void RemoveTama(int searchId)
+        {
+            _instances.RemoveAt(searchId - 1);
         }
     }
 }

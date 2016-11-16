@@ -1,8 +1,9 @@
 using Nancy;
+using System;
 using System.Collections.Generic;
-using Tamagotchi.Objects;
+using Tamagotchis.Objects;
 
-namespace Tamagotchi
+namespace Tamagotchis
 {
     public class HomeModule : NancyModule
     {
@@ -27,6 +28,34 @@ namespace Tamagotchi
                 Tamagotchi newTama = new Tamagotchi(tamaName);
                 List<Tamagotchi> allTamagotchis = Tamagotchi.GetAll();
                 return View["tamagotchis.cshtml", allTamagotchis];
+            };
+            Post["/tamagotchis/{id}"] = parameters => {
+                string whichButton = Request.Form["which-button"];
+                Tamagotchi selectedTama = Tamagotchi.Find(parameters.id);
+                if(whichButton == "remove")
+                {
+                    Tamagotchi.RemoveTama(parameters.id);
+                    List<Tamagotchi> allTamagotchis = Tamagotchi.GetAll();
+                    return View["tamagotchis.cshtml", allTamagotchis];
+                }
+                else
+                {
+                    selectedTama.PassTime();
+                    if(whichButton == "hunger")
+                    {
+                        selectedTama.Hunger();
+                    }
+                    else if(whichButton == "happiness")
+                    {
+                        selectedTama.Happiness();
+                    }
+                    else if(whichButton == "sleep")
+                    {
+                        selectedTama.Sleep();
+                    }
+                    selectedTama.CheckAlive();
+                    return View["tamagotchi.cshtml", selectedTama];
+                }
             };
         }
     }

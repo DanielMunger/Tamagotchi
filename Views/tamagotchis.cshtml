@@ -1,0 +1,7 @@
+<h1>Tamagotchis in your Ranch</h1>
+<h2>Click on a Tamagotchi's name to begin interaction with it</h2>
+@foreach (var tama in Model)
+{
+    <li><a href="/tamagotchis/@tama.GetId()">@tama.GetName()</a></li>
+}
+<h2><a href="/tamagotchis/new">Click here to add another Tamagotchi to the Ranch</a></h2>

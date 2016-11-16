@@ -6,7 +6,7 @@ using Nancy;
 using Nancy.Owin;
 using Nancy.ViewEngines.Razor;
 
-namespace Tamagotchi
+namespace Tamagotchis
 {
   public class Startup
   {
